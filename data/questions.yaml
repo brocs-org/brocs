@@ -1,0 +1,544 @@
+# The questions people actually ask, in the words they actually use.
+#
+# These come from real engagements, not from a keyword tool. Keep the phrasing close to
+# how it was said: the value of this file is that it is buyer language rather than
+# framework language, and the pages rank for the words people type.
+#
+# The first twelve are the originals; later additions are recorded in the changelog.
+#
+# answer: what a good answer looks like. Never a product. If an entry starts reading
+# like a pitch, cut it.
+
+- q: >-
+    Your cloud is down, or at least your region. Can you build and run somewhere else? How
+    long does that switch take?
+  letters:
+  - run
+  - control
+  tests: >
+    Whether portability is a property of the system or a slide. The follow-up question is
+    the real one: how long, and who measured it.
+  answer: >
+    A good answer names a second placement that exists today, a runbook someone has executed,
+    and a number in hours that came from a drill rather than an estimate. A bad answer describes
+    a capability in principle. Compute is the easy half; the switch time is almost always
+    dominated by state, meaning where the database is, how current the replica is, and how
+    long the vector index takes to rebuild. If nobody can say what the index rebuild costs
+    in hours and money, the recovery time is unknown rather than short.
+  links:
+  - - Portability
+    - /run/portability/
+  - - Data and state
+    - /run/data-and-state/
+  - - Routing
+    - /control/routing/
+- q: >-
+    Can you guarantee our data and code never leave the perimeter? Then how does anyone work
+    remotely?
+  letters:
+  - run
+  - control
+  - secure
+  tests: >
+    Whether remote access is understood as moving the work to the person or moving the data
+    to the person.
+  answer: >
+    Those two requirements only conflict if the work happens on the endpoint. The resolution
+    is to move the workspace rather than the data: the editor, the terminal, and the agent
+    run inside the boundary, and what crosses the wire is pixels and keystrokes. The laptop
+    becomes a viewport. Then "never leaves the perimeter" is an architectural fact you can
+    demonstrate rather than a policy people have to obey, and the answer to a lost laptop
+    is to revoke a session instead of opening an incident.
+  links:
+  - - Remote access
+    - /control/remote-access/
+  - - Runtime
+    - /run/runtime/
+  - - Ingress
+    - /control/ingress/
+- q: How do you track what consultants are accessing while they are in your network?
+  letters:
+  - control
+  - observe
+  tests: >
+    Whether external people have their own identities, time-bound access, and a per-person
+    record, or a shared credential and a VPN.
+  answer: >
+    The shape that works is federation rather than accounts: the consultant authenticates
+    against their own employer's identity provider, your ingress maps that to a scoped role,
+    and the grant carries an expiry that matches the statement of work. Every request is then
+    attributable to a named person without your directory ever holding them. The failure shape
+    is a shared credential in an email, which produces access records that say "the contractor
+    account" and outlive the engagement by years. If you cannot answer "which consultant opened
+    that record on the 14th", you do not have oversight, you have a network.
+  links:
+  - - Identity
+    - /control/identity/
+  - - Remote access
+    - /control/remote-access/
+  - - Traces
+    - /observe/traces/
+- q: Can you provide tooling beyond a terminal server, an SSH session, or a VPN?
+  letters:
+  - build
+  - control
+  tests: >
+    Whether the sanctioned remote path is good enough that people use it, or bad enough that
+    they route around it.
+  answer: >
+    This is a usability question with a security consequence. A remote path that is slower
+    and worse than working locally loses, and the way it loses is that people copy the repository
+    to the laptop "just for today". So the bar is a full working environment: the editor people
+    already use, a real terminal, the agent tooling, the data connections, and enough responsiveness
+    that nobody notices where it runs. If the only options are a jump box and a VPN, expect
+    the data to be on the endpoint regardless of what the policy says.
+  links:
+  - - Tooling
+    - /build/tooling/
+  - - Remote access
+    - /control/remote-access/
+  - - Idea to production
+    - /build/idea-to-production/
+- q: >-
+    What are your agents up to? What can they do and touch? How do you know they are doing
+    what they are supposed to?
+  letters:
+  - secure
+  - observe
+  tests: >
+    Whether anyone has written down the blast radius, and whether there is a record good enough
+    to answer the third part after the fact.
+  answer: >
+    Three artifacts answer this and most organizations have none of them. A permissions document
+    per agent, listing tools with the operations each permits, the identity it acts as, what
+    it can read, where it can send bytes, and what it can spend. A trace per run, recording
+    every tool call with its arguments and the identity it was made under. And a sampled review
+    after the fact, because approval-before-action gets clicked through within a week while
+    nobody ever reads what actually happened.
+  links:
+  - - Agents
+    - /secure/agents/
+  - - Traces
+    - /observe/traces/
+  - - Governance
+    - /secure/governance/
+- q: >-
+    How do we know someone in accounting is not using the company assistant to write their
+    novel?
+  letters:
+  - secure
+  - observe
+  tests: >
+    Whether inference is attributed per user and per application at all. The novel is rarely
+    the actual concern.
+  answer: >
+    You know the same way you know anything else about usage: every inference call carries
+    an application, a team, and a user, because it went through a gateway rather than a distributed
+    provider key. Then unusual patterns are visible without anyone reading prompts, which
+    matters because reading prompts to enforce acceptable use is both invasive and unreliable.
+    Worth being honest about the ranking, though: personal use is a policy annoyance, while
+    the same missing attribution also means you cannot answer what anything costs, who caused
+    a spike, or which team is actually getting value. Fix the attribution and the novel takes
+    care of itself.
+  links:
+  - - Cost
+    - /secure/cost/
+  - - Metrics
+    - /observe/metrics/
+  - - Shadow AI
+    - /secure/shadow-ai/
+- q: >-
+    Are people feeding corporate data, IP, PII, or PHI into hyperscaler model endpoints without
+    a BAA or approval?
+  letters:
+  - build
+  - control
+  - secure
+  tests: >
+    Whether endpoint eligibility is enforced by a system or documented in a policy.
+  answer: >
+    Assume yes until something enforces otherwise, because the sanctioned path is usually
+    slower than the browser tab. The enforceable version has two halves. Eligibility is data:
+    which endpoints are covered by which agreement is recorded somewhere the routing layer
+    reads, so a request tagged as containing protected data can only reach a covered endpoint.
+    And discovery is separate work, because the traffic you most need to find is the traffic
+    that never went through your gateway. Start with expense reports and the OAuth grant list
+    in your identity provider; both are faster than network telemetry and usually more revealing.
+  links:
+  - - Keys and models
+    - /build/keys-and-models/
+  - - Routing
+    - /control/routing/
+  - - Shadow AI
+    - /secure/shadow-ai/
+  - - Compliance
+    - /secure/compliance/
+- q: >-
+    How do I provide consistent tooling and runtime across every cloud and the local datacentre?
+  letters:
+  - build
+  - run
+  tests: >
+    Whether the platform abstracts the deployment unit and the model endpoint, or tries to
+    abstract whole clouds.
+  answer: >
+    The hybrid cloud lesson applies directly: abstract the workload and the small set of interfaces
+    it depends on, not the infrastructure. In practice that means a containerised deployment
+    unit, a model endpoint that is a capability rather than a provider name, object storage
+    and SQL rather than proprietary equivalents, one federated identity provider, and a data
+    plane that keeps serving when the central control plane is unreachable. Get those five
+    right and placement becomes a configuration value. Get them wrong and every environment
+    is a fork.
+  links:
+  - - Portability
+    - /run/portability/
+  - - Tooling
+    - /build/tooling/
+  - - Routing
+    - /control/routing/
+- q: How do I let people do remote work without taking data or code with them?
+  letters:
+  - control
+  - run
+  tests: >
+    Whether there is a zero-footprint path, and whether it is pleasant enough to be the default
+    rather than the exception.
+  answer: >
+    Put the workspace inside the boundary and give the person a session, not a copy. Nothing
+    syncs, nothing clones, and the controls that matter are the boring ones: clipboard and
+    file-transfer policy on the session, egress restrictions from the workspace, and an idle
+    timeout. The test is not whether the capability exists. It is whether an engineer would
+    choose it on a normal Tuesday, because a zero-footprint path people avoid produces a footprint
+    anyway.
+  links:
+  - - Remote access
+    - /control/remote-access/
+  - - Runtime
+    - /run/runtime/
+  - - Storage and backups
+    - /control/storage-and-backups/
+- q: What happens when someone crosses a border with a laptop and still needs access?
+  letters:
+  - secure
+  - control
+  tests: >
+    Whether the laptop holds anything worth seizing, and whether access can be scoped by where
+    the person currently is.
+  answer: >
+    Two separate problems, and conflating them is why this usually goes badly. The device
+    problem is solved by the laptop holding nothing: if the workspace lives inside the boundary,
+    an inspected or seized machine yields a browser and a revoked session. The access problem
+    is that the same person, in a different country, may be subject to different rules about
+    what they can reach, which means location has to be an input to authorization rather than
+    a property of the network they dialled in from. Both are worth deciding before the trip,
+    because the alternative is a policy written at an airport.
+  links:
+  - - Remote access
+    - /control/remote-access/
+  - - Identity
+    - /control/identity/
+  - - Compliance
+    - /secure/compliance/
+- q: >-
+    How do we govern cross-border data access when the person is in one jurisdiction and the
+    data is in another?
+  letters:
+  - secure
+  - control
+  tests: >
+    Whether residency is enforced at the point of processing or asserted in a diagram.
+  answer: >
+    Split the question in two, because the answers are different. Where the data is processed
+    is a placement decision and it has to be enforced by the runtime and the routing layer:
+    a request tagged for one region must not be served by a model or a workspace in another,
+    and that is a control rather than a convention. Who may reach it is an authorization decision
+    that has to take the person's current location as an input. The record that ties them
+    together is the access log plus the trace, which is also exactly what a regulator asks
+    for, so building it once serves both purposes.
+  links:
+  - - Portability
+    - /run/portability/
+  - - Routing
+    - /control/routing/
+  - - Compliance
+    - /secure/compliance/
+- q: How do we actually facilitate data sovereignty rather than promise it?
+  letters:
+  - run
+  - secure
+  tests: >
+    Whether the sovereign paths are live options or roadmap items.
+  answer: >
+    Sovereignty is demonstrable or it is marketing. The demonstration has three parts. Inference
+    happens somewhere you control, which means at least one of a local model, a model served
+    through your own cloud account, or a contractually covered endpoint is running today rather
+    than planned. Placement is a property of a workload rather than of an installation, so
+    a new jurisdiction is a configuration change instead of a parallel platform. And the deployed
+    system keeps working when the central control plane is unreachable, because a dependency
+    on someone else's control plane is a dependency on someone else's jurisdiction.
+  links:
+  - - Portability
+    - /run/portability/
+  - - Compliance
+    - /secure/compliance/
+  - - Runtime
+    - /run/runtime/
+- q: >-
+    What stops one of our own people from using the assistant to walk half the customer database
+    out the door, politely, one question at a time?
+  letters:
+  - control
+  - observe
+  - secure
+  tests: >-
+    Whether the assistant inherits the caller's entitlements or connects to data with its
+    own privileged credential. If it runs as a service account with broad read access, it
+    is an entitlement bypass with a chat interface. Also whether anyone watches aggregate
+    patterns, because this insider looks like thousands of small authorized queries, not one
+    big theft.
+  answer: >-
+    The invariant comes first: the assistant can never read what the person asking could not
+    read directly, because queries run under the user's own identity and row-level entitlements,
+    not a shared connector credential. Then volume: per-user quotas, and monitoring that treats
+    "this analyst pulled 40,000 customer records through the assistant this week" as a signal
+    even though every single query was authorized. Then export: whatever leaves as files,
+    summaries, or pasted output goes through the same loss-prevention path as any other channel.
+    A bad answer describes the data connector proudly and cannot say whose permissions it
+    runs with. That is not a feature. It is a breach with good UX.
+  links:
+  - - Identity
+    - /control/identity/
+  - - Data access
+    - /build/data-access/
+  - - Traces
+    - /observe/traces/
+- q: >-
+    If someone hides instructions in a document or an email and our agent reads it, what stops
+    the agent from doing what the document says instead of what we said?
+  letters:
+  - secure
+  - control
+  - observe
+  tests: >-
+    Whether the vendor treats everything the agent reads as attack surface, or trusts the
+    model to tell instructions from data. The mature answer is architectural: least-privilege
+    tools, egress control, and human gates that hold even when the model is successfully fooled.
+    The immature answer is confidence in the model's training.
+  answer: >-
+    A good answer concedes the premise: injection through retrieved content is not reliably
+    solvable at the model layer, so the defenses live around the model. Each agent's tools
+    are scoped to the minimum it needs, so a fooled agent can only do what a compromised low-privilege
+    user could do. Outbound egress is constrained, so "send this file to an external address"
+    fails at the boundary regardless of why the agent tried it. Irreversible actions require
+    an approval that hostile text cannot click. And the traces should make an agent suddenly
+    acting out of pattern visible. A bad answer is "the model is trained to resist that",
+    full stop, which makes your controls a property of someone else's fine-tune.
+  links:
+  - - Agents
+    - /secure/agents/
+  - - Runtime
+    - /run/runtime/
+  - - Traces
+    - /observe/traces/
+- q: >-
+    What do you keep of what we send you, for how long, and does any of it end up training
+    your models?
+  letters:
+  - secure
+  - control
+  tests: >-
+    Whether the data path to every model in the stack is known and contractually pinned, or
+    assumed. Retention and training terms differ per provider, per tier, and sometimes per
+    endpoint, and "we don't train on your data" is often a setting someone had to turn on,
+    not a default.
+  answer: >-
+    A good answer is an inventory, not a slogan: for each model behind the platform, what
+    is retained (prompts, outputs, embeddings, logs), the retention window in days, where
+    it physically sits, and the contract clause that says so, with the BAA or DPA where regulated
+    data is involved. It separates the platform's own logging, which you may want for audit,
+    from the provider's retention, which you mostly want at zero, and it covers the quiet
+    paths: abuse-monitoring buffers, support access, telemetry. A bad answer cites one provider's
+    marketing page and goes silent on the other four models in the routing table.
+  links:
+  - - Keys and models
+    - /build/keys-and-models/
+  - - Storage and backups
+    - /control/storage-and-backups/
+  - - Compliance
+    - /secure/compliance/
+- q: >-
+    An agent did something wrong at 2am. Who gets paged, what do we shut off, and what do
+    we show the regulator afterwards?
+  letters:
+  - observe
+  - run
+  - control
+  tests: >-
+    Whether AI systems live inside the existing incident machinery or outside it: a named
+    owner on a rotation rather than "the AI team", severity definitions that treat unavailable,
+    degraded quality, and did-something-it-shouldn't as three distinct failures, a kill switch
+    that stops one agent without taking down everything, and a record complete enough to reconstruct
+    what the agent saw, decided, and touched.
+  answer: >-
+    A good answer names the runbook, not the aspiration. The agent shows up in the same paging
+    and ticketing systems as every other production service, with an owner and an SLO before
+    launch, not after the first weekend incident. There is a per-agent stop, revoke, and quarantine
+    action someone has executed in a drill, not just a platform-wide off switch. Afterwards,
+    the trace shows the whole chain: what came in, what the agent decided, which tools it
+    called, what data those calls touched, tied to a model and prompt version. A bad answer
+    is "we would disable the integration", which means the blast radius of one bad agent is
+    every workload on the platform, and the postmortem is archaeology.
+  links:
+  - - Alerts
+    - /observe/alerts/
+  - - Traces
+    - /observe/traces/
+  - - Ingress
+    - /control/ingress/
+- q: >-
+    What does this actually cost at full rollout, and can we put a hard cap on it? I'm not
+    signing up for a bill that scales with employee enthusiasm.
+  letters:
+  - secure
+  - observe
+  - control
+  tests: >-
+    Whether consumption is a measured, attributable, capped quantity or a monthly surprise.
+    Per-seat pricing that quietly excludes inference is one trap; two hundred apps hammering
+    one shared org-level key is the other, because the batch job and the customer-facing app
+    starve each other in the same peak hour.
+  answer: >-
+    A good answer names the metered unit and shows attribution per user, team, and app, which
+    requires every call to pass one gateway rather than scattered provider keys. Caps are
+    enforcement, not notification: budgets that throttle, degrade to a cheaper model, or block
+    when crossed, set per app; an alert email is not a cap. The same metering point handles
+    contention, with priorities so interactive apps win and batch queues or sheds first, by
+    a policy written in peacetime rather than during month-end close. The honest vendor also
+    names the step-function costs, like index rebuilds and fine-tuning runs. If nobody can
+    say what last month cost per team, the at-scale number is fiction.
+  links:
+  - - Cost
+    - /secure/cost/
+  - - Metrics
+    - /observe/metrics/
+  - - Routing
+    - /control/routing/
+- q: >-
+    Our SOC 2 audit now has AI in scope. What evidence can you actually hand my auditor, and
+    is any of it going to be screenshots?
+  letters:
+  - secure
+  - observe
+  - control
+  tests: >-
+    Whether the controls produce evidence as a by-product of operating, or whether audit season
+    means three weeks of manual assembly. Also whether the platform's attestations compose
+    with yours: the auditor will ask who can reach which models, who changed the prompts,
+    and who reviewed the agents' permissions, and those answers need artifacts.
+  answer: >-
+    A good answer maps each AI-specific control to the evidence it emits continuously: access
+    reviews enumerating who can reach which models and data, change records for prompts and
+    agent configurations with approvals attached, logs showing policy enforcement happening
+    rather than existing, and the platform's own attestation to cover what you inherit. "Exportable"
+    is the word that matters; evidence the auditor can pull for a date range beats evidence
+    someone screenshots in March. A bad answer is a certifications page with no way to get
+    artifacts out, which means the AI scope of your audit is assembled by hand from tickets
+    and memory, and next year it is assembled again.
+  links:
+  - - Compliance
+    - /secure/compliance/
+  - - Configuration
+    - /control/configuration/
+  - - Traces
+    - /observe/traces/
+- q: >-
+    Can this run with the cable unplugged, no internet at all? And when the answer is yes,
+    how do model updates get in?
+  letters:
+  - run
+  - build
+  - control
+  tests: >-
+    Whether on-prem means disconnected or merely nearby. Many air-gap claims still phone home
+    for license checks, telemetry, container pulls, or the model API itself, and each of those
+    is a wire across the gap. The update question is the honesty check: a real air gap makes
+    updating models and software genuinely hard, and a vendor who says it is easy has not
+    done it.
+  answer: >-
+    A good answer enumerates every outbound dependency and shows it removed or replaced: licensing
+    that works offline, telemetry that can be off rather than buffered, an internal registry
+    for images and model weights, and models that run entirely inside the gap. Then the transfer
+    procedure as an operated process: signed, versioned bundles carried across on approved
+    media, verified on arrival, with a documented cadence and a rollback. The tell is specificity
+    about what degrades; a truthful vendor can say which features assume connectivity and
+    what their absence costs. A bad answer is "yes, air-gapped is supported" followed by an
+    install guide whose first step pulls from a public registry.
+  links:
+  - - Portability
+    - /run/portability/
+  - - Runtime
+    - /run/runtime/
+  - - Routing
+    - /control/routing/
+- q: >-
+    If this doesn't work out, how do we get everything out? Not just the documents. The prompts,
+    the fine-tunes, the embeddings, the logs. And if you get bought or go under, can we keep
+    running without you?
+  letters:
+  - run
+  - control
+  - build
+  tests: >-
+    Whether exit and vendor failure are engineered paths or professional-services negotiations
+    that start after notice is given. The derived artifacts are the real test: everyone exports
+    raw data, almost nobody returns the fine-tuned weights, the vector indexes, and the traces.
+    And whether continuity depends on the vendor existing at all, which is an architecture
+    question before it is an escrow clause.
+  answer: >-
+    A good answer starts with an inventory of everything the platform holds on your behalf:
+    source data, prompts, workflow definitions, fine-tuned weights, vector indexes, audit
+    logs, and states which of those come out, in what open format, at what cost, in how many
+    days, naming an export that has actually been run rather than a clause that permits one.
+    On continuity, the strong form is architectural: the software runs in your tenancy, so
+    the vendor disappearing is a roadmap problem rather than an outage with a date, and you
+    hold a perpetual license to the version you have. Escrow counts only when the deposits
+    are current and someone other than the vendor has built from them. A bad answer is "you
+    can always pull it through the API", which quietly means rebuilding the expensive derived
+    state from scratch. Whatever the switching cost is becomes the ceiling on your leverage
+    at every renewal.
+  links:
+  - - Data and state
+    - /run/data-and-state/
+  - - Portability
+    - /run/portability/
+  - - Provisioning
+    - /run/provisioning/
+- q: >-
+    The provider updated the model under us and quality dropped over the weekend. How would
+    we even know? And when they deprecate it outright, how bad is the migration?
+  letters:
+  - observe
+  - control
+  - run
+  tests: >-
+    Whether a third-party model is treated as a dependency you manage or as weather. Pinned
+    versions, a baseline eval that catches silent swaps, notice periods in the contract rather
+    than a changelog policy, and workflows that call an abstraction instead of a model directly,
+    so substitution is a measured diff and not a rewrite on someone else's deadline.
+  answer: >-
+    Pin model versions everywhere the provider allows it; where they don't, that is a risk
+    accepted in writing. Run a scheduled eval against a golden set of real cases so a silent
+    change shows up as a metric diff within hours, with an alert, not as a slow bleed of user
+    trust. Any model change, planned or not, gets a change record, an eval comparison, and
+    a go or no-go like every other dependency upgrade, and one approved alternative stays
+    warm per critical app so "roll back the model" is an actual option. Self-hosted open weights
+    are the strong form of the answer, since deprecation becomes your decision on your schedule.
+    A vendor who says "the new model is better" has answered a different question than the
+    one asked.
+  links:
+  - - Model behaviour
+    - /observe/model-behavior/
+  - - Routing
+    - /control/routing/
+  - - Configuration
+    - /control/configuration/

@@ -1,0 +1,104 @@
+# The reading list. Sources the framework leans on, grouped by what they are good for,
+# each with why it earns a place. Rules: primary sources over commentary, free over
+# paywalled where a free canonical exists, and every entry says which letters it feeds.
+# This is SPEC section 4's fourth resource, and it is also citation surface: pages that
+# link their homework get cited as homework.
+
+- group: "The adjacent disciplines"
+  note: >
+    BROCS borrows more than it invents. These are the bodies of work each letter leans
+    on, and the fastest way to get strong at a letter is still to read its discipline.
+  items:
+    - title: "DORA research program"
+      url: "https://dora.dev/research/"
+      letters: [build]
+      why: >
+        The delivery-performance metrics BROCS borrows directly, lead time above all.
+        Years of evidence that speed and stability are not a trade-off, which is also
+        the right frame for AI enablement.
+    - title: "Google SRE books"
+      url: "https://sre.google/books/"
+      letters: [run, observe]
+      why: >
+        Free, canonical, and still the best writing on error budgets, golden signals,
+        toil, and being on call. The Observe and Run letters assume this vocabulary.
+    - title: "The FinOps Framework"
+      url: "https://www.finops.org/framework/"
+      letters: [secure]
+      why: >
+        Inform, optimise, operate. The cost half of Secure is FinOps applied to
+        inference, and the framework transfers with one amendment: monthly is too slow.
+    - title: "Platform engineering community"
+      url: "https://platformengineering.org/blog"
+      letters: [build, run]
+      why: >
+        The paved-road, platform-as-product school BROCS leans on hardest. If your
+        organization has no platform practice, start here before starting with AI.
+
+- group: "Security and governance"
+  note: >
+    The Secure letter's homework. The first two are the references for what actually
+    goes wrong; the second two are the regimes the evidence has to satisfy.
+  items:
+    - title: "OWASP Top 10 for LLM Applications"
+      url: "https://genai.owasp.org/llm-top-10/"
+      letters: [secure]
+      why: >
+        The community consensus on LLM-specific failure classes: prompt injection,
+        insecure output handling, excessive agency. The vocabulary your security review
+        should be conducted in.
+    - title: "AI Incident Database"
+      url: "https://incidentdatabase.ai/"
+      letters: [secure, observe]
+      why: >
+        The closest thing the field has to an aviation-style incident registry. Several
+        entries in the failure-mode library cite it; browsing it is a fast way to
+        calibrate what actually happens versus what gets speculated about.
+    - title: "NIST AI Risk Management Framework"
+      url: "https://www.nist.gov/itl/ai-risk-management-framework"
+      letters: [secure]
+      why: >
+        Govern, Map, Measure, Manage. Voluntary, widely referenced, and maps cleanly
+        onto the surface: Map and Measure land on Observe, Manage on Control, Govern on
+        Secure. Speak both vocabularies and audits get shorter.
+    - title: "EU AI Act (Regulation 2024/1689)"
+      url: "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+      letters: [secure]
+      why: >
+        The primary text, not a summary. The operational consequence for engineering
+        teams is record-keeping, which is the agent trace with a retention policy. The
+        implementation-tracker at artificialintelligenceact.eu is the readable companion.
+
+- group: "Evidence for the theses"
+  note: >
+    The numbers and cases the site cites, so you can check the homework and reuse it in
+    your own decks.
+  items:
+    - title: "Cisco 2024 Data Privacy Benchmark Study"
+      url: "https://newsroom.cisco.com/c/r/newsroom/en/us/a/y2024/m01/organizations-ban-use-of-generative-ai-over-data-privacy-security-cisco-study.html"
+      letters: [secure, build]
+      why: >
+        The shadow AI numbers: 48 percent of organizations admitted entering non-public
+        company information into generative AI tools, 27 percent banned the tools at
+        least temporarily. A survey of 2,600 privacy and security professionals.
+    - title: "Wiz Research: the exposed DeepSeek database"
+      url: "https://www.wiz.io/blog/wiz-research-uncovers-exposed-deepseek-database-leak"
+      letters: [run, secure]
+      why: >
+        The reference case for vendor-side risk: over a million log lines, chat history,
+        and API keys on an unauthenticated ClickHouse. What your builders send to an
+        endpoint lands in someone's logs.
+    - title: "EchoLeak: zero-click prompt injection in production (arXiv:2509.10540)"
+      url: "https://arxiv.org/abs/2509.10540"
+      letters: [secure]
+      why: >
+        The first documented zero-click prompt injection exploit in a production system,
+        written up properly. The reason "untrusted content is an instruction channel" is
+        a design constraint rather than a talking point.
+    - title: "Moffatt v. Air Canada, 2024 BCCRT 149"
+      url: "https://s3.amazonaws.com/IGG/AI+Part+1+-+Materials/Moffatt+v.+Air+Canada.pdf"
+      letters: [control, secure]
+      why: >
+        The tribunal decision itself: a company is liable for what its chatbot tells a
+        customer. Short, readable, and the strongest single argument for a retrieval
+        boundary that legal has ever handed engineering.

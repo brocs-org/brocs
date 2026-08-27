@@ -44,7 +44,7 @@
   letter: C
   name: Control
   tagline: "Keep a hand on the wheel."
-  blurb: "Configuration, ingress, identity, storage, and routing you can change and roll back."
+  blurb: "Configuration, ingress, identity, storage, routing, and remote access you can change and roll back."
   roots: "Control theory, ClickOps to GitOps"
   handoff: secure
   verticals:
@@ -53,6 +53,7 @@
     - "Identity: SSO by default, external access without VPN sprawl"
     - "Storage and backups: retention, lifecycle, restore drills"
     - "Routing: model and provider routing, pinning, failover"
+    - "Remote access: work reaches the data instead of the data reaching the laptop"
 - key: secure
   letter: S
   name: Secure

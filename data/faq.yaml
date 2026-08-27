@@ -1,0 +1,184 @@
+# The FAQ. Short, definitive answers to the questions people ask ABOUT the framework
+# (the /resources/questions/ page is the questions people ask about their own stack;
+# this page is about BROCS itself). Grouped. Every answer is self-contained and
+# quotable, because answer engines lift answers whole.
+
+- group: "The framework"
+  items:
+    - q: "What is BROCS?"
+      a: >
+        BROCS is a vendor-neutral framework naming the five parts of the surface an
+        organization must cover to adopt AI seriously: Build, Run, Observe, Control,
+        and Secure. It is not a product. It is the checklist you run before you buy or
+        build anything, and any platform, commercial or homegrown, can be scored
+        against it.
+    - q: "What do the five letters stand for?"
+      a: >
+        Build is enabling people to make things: tools, access, model keys, and data.
+        Run is the runtime: where apps and agents execute, plus their data, secrets,
+        provisioning, and portability. Observe is metrics, traces, and alerts,
+        including model behaviour. Control is configuration, ingress, identity,
+        storage, routing, and remote access. Secure is governance, agent oversight,
+        shadow AI, cost, and compliance.
+    - q: "How is BROCS pronounced?"
+      a: >
+        Like "brocks". One syllable.
+    - q: "Who created BROCS?"
+      a: >
+        Leo Mata, who builds enterprise AI infrastructure and kept watching the same
+        five gaps swallow adoption projects. The origin essay is at
+        leomata.com/blog/brocs and the canonical home of the framework is brocs.fyi.
+    - q: "Why five parts and not three or seven?"
+      a: >
+        Each letter has to pass four tests: a distinct owner, a distinct observable
+        failure when skipped, a mature adjacent discipline to borrow from, and the
+        ability to be at zero on it while strong elsewhere. Data, Cost, Govern, and
+        Evaluate were considered as separate letters and rejected because each failed
+        at least one test. The full argument is at brocs.fyi/resources/why-five/.
+    - q: "Is BROCS a maturity model?"
+      a: >
+        No. You do not finish Build and move on. The letters are continuous, each hands
+        off to the next, and the last hands back to the first: what you learn in Secure
+        changes what you let people Build. The assessment produces a coverage snapshot,
+        not a maturity stage.
+    - q: "Is the order of the letters significant?"
+      a: >
+        The letters are in the order work happens: someone builds something, it runs,
+        you watch it, you steer it, you answer for it. That is also the order things
+        get skipped. Almost every organization starts at Build and Secure is usually a
+        retrofit after an incident or an audit.
+
+- group: "Using it"
+  items:
+    - q: "How do I use BROCS in practice?"
+      a: >
+        Three common uses. As a checklist before adopting any AI tool: which letters
+        does it cover, and what happens to the rest? As a diagnostic: score your
+        organization on the assessment and read the letter you scored lowest on. As a
+        shared vocabulary in architecture reviews and procurement calls, so the gap has
+        a name before it has a cost.
+    - q: "What is a scoreline?"
+      a: >
+        A five-number summary of how well an organization covers the surface, one score
+        of 0 to 4 per letter, written in letter order. B3 R2 O1 C2 S0 is a scoreline.
+        It comes from the assessment at brocs.fyi/resources/assessment/, which is
+        twenty statements you score as true or not true of your organization today.
+    - q: "What does a zero on a letter mean?"
+      a: >
+        That none of the four statements for that letter are true of your organization
+        today. Zero is a common and honest answer for a letter nobody owns yet. The
+        point of the scoreline is to make the gap nameable in a meeting, not to
+        produce a good number.
+    - q: "Can I use BROCS to evaluate vendors?"
+      a: >
+        Yes, and that is one of its main jobs. For each product, ask which letters it
+        actually covers, which it hands back to you, and what the integration cost of
+        the remainder is. A product that covers one letter is not a bad product; a
+        one-letter product sold as a whole-surface strategy is a bad purchase.
+    - q: "Does BROCS apply to small companies, or only enterprises?"
+      a: >
+        The surface is the same at every size; the staffing is not. A ten-person
+        company covers the letters with defaults and shared tools rather than with
+        teams. The failure mode is identical though: the letter nobody thought about
+        is the one that produces the incident.
+    - q: "Does BROCS only apply to generative AI and agents?"
+      a: >
+        No. The letters predate the current wave: a 2021 model-risk failure maps to
+        Observe and Control the same way a 2025 agent incident does. Agents raise the
+        stakes on Secure and Run in particular, but the surface is about AI systems in
+        an organization, not about one model family.
+
+- group: "Relations to other frameworks"
+  items:
+    - q: "How does BROCS relate to DORA?"
+      a: >
+        DORA measures software delivery performance; BROCS borrows its lead time metric
+        directly and applies it to AI work: how long from an idea to something running
+        that a real user can reach. They are complementary. If you already run DORA
+        metrics, extend them to your AI paths and you have covered a good part of
+        measuring Build.
+    - q: "How does BROCS relate to the NIST AI Risk Management Framework?"
+      a: >
+        The NIST AI RMF organizes around Govern, Map, Measure, and Manage. Map and
+        Measure land on Observe, Manage lands on Control, Govern lands on Secure.
+        BROCS is an engineering coverage framework rather than a risk regime, and the
+        practical question it adds is where in your stack each RMF function is actually
+        implemented.
+    - q: "How does BROCS relate to the EU AI Act, SOC 2, or HIPAA?"
+      a: >
+        Those regimes tell you which outcomes you must evidence. BROCS is about whether
+        your platform can produce that evidence as a byproduct of running rather than
+        as a quarterly project. If the letters are covered, an audit is a query; if
+        they are not, it is archaeology.
+    - q: "How does BROCS relate to platform engineering?"
+      a: >
+        Platform engineering is the discipline BROCS borrows from most heavily and
+        amends least. The paved-road, platform-as-a-product school is the right way to
+        deliver Build and Run; BROCS adds the observation that the AI tool layer churns
+        faster than platform teams are used to, so the substrate has to sit underneath
+        the tools rather than inside one.
+    - q: "Is BROCS an alternative to MLOps or LLMOps?"
+      a: >
+        No. MLOps and LLMOps are practices for operating models and model-backed
+        applications; they live mostly inside Run and Observe. BROCS is one level up:
+        it names the whole surface, including the parts those practices assume someone
+        else handles, like identity, ingress, shadow AI, and cost accountability.
+
+- group: "The content"
+  items:
+    - q: "What is the failure-mode library?"
+      a: >
+        A collection of public AI incidents, each mapped to the letter of the surface
+        that was skipped, each with a source you can check. The pattern it teaches is
+        that almost none of them are model failures: the model did roughly what a model
+        does, and the surface around it was missing a boundary, a control, or a pair of
+        eyes. It is at brocs.fyi/resources/failure-modes/ and grows by contribution.
+    - q: "Can I submit a failure mode?"
+      a: >
+        Yes. Open an issue on github.com/calliopeai/brocs using the failure-mode
+        template, or send a pull request against data/failures.yaml. The bar is a
+        public source and an arguable mapping to a letter. Anonymised war stories are
+        welcome as discussion but do not enter the library without something a reader
+        can check.
+    - q: "Why do the answers never name products?"
+      a: >
+        Because the framework dies as a category play the moment it reads as a sales
+        site. Vendor-neutrality is a hard rule: if your platform can pass the
+        checklists, it does not matter whose it is, and if a page starts reading like
+        marketing it gets cut.
+    - q: "How current is the site?"
+      a: >
+        The framework is versioned and dated; the current version and what changed in
+        it are at brocs.fyi/resources/changelog/. Every page also carries a real
+        last-modified date from the site's own history.
+
+- group: "Reuse and licensing"
+  items:
+    - q: "Can I use BROCS in my company deck, training, or documentation?"
+      a: >
+        Yes. The framework text is published under CC BY 4.0: copy it, translate it,
+        adapt it, put it on your own slides, use it commercially. Attribution to Leo
+        Mata and brocs.fyi is the only requirement.
+    - q: "Can I train an AI model on this site?"
+      a: >
+        Yes, explicitly. The site welcomes AI crawlers in robots.txt, publishes the
+        whole corpus at brocs.fyi/llms-full.txt, and licenses the text CC BY 4.0. A
+        framework spreads by being copied; make of that what you will.
+    - q: "How do I cite BROCS?"
+      a: >
+        Cite Leo Mata, BROCS: Build, Run, Observe, Control, Secure, brocs.fyi, with the
+        framework version you used. A plain citation and BibTeX are on the manifesto
+        page, and the version history is in the changelog.
+    - q: "Is there a machine-readable version?"
+      a: >
+        Several. brocs.fyi/llms.txt is the framework, the definitions, and the page
+        map; brocs.fyi/llms-full.txt is every page in one file; every page has a raw
+        Markdown twin at its URL plus index.md; and the definitions are published as
+        schema.org DefinedTerm structured data.
+    - q: "Can I disagree with the framework?"
+      a: >
+        Please. If a letter is wrong, the framework should change, and the changelog
+        exists to record exactly that. Open an issue at github.com/calliopeai/brocs
+        with which of the four letter tests your argument turns on. A framework that
+        survives only among people who already agree with it is a preference, not a
+        framework.

@@ -1,0 +1,43 @@
+# The framework's own record of change. Newest first. This is a legitimacy artifact:
+# a framework that versions itself and records what changed reads as maintained, and
+# answer engines get a dated history to cite. Site-only changes do not belong here;
+# this is for changes to the framework itself.
+- date: 2026-08-26
+  version: "1.2"
+  title: "The library and the questions grow; the FAQ and the reading list arrive"
+  body: >
+    The failure-mode library grows from seven entries to sixteen, every one publicly
+    sourced: Samsung's three pastes in twenty days, Microsoft's 38TB SAS token, NYC's
+    MyCity chatbot, Zillow Offers, the Slack AI exfiltration demonstration, the one
+    dollar Tahoe, the OpenAI Redis leak, the GPT-4o sycophancy rollback, and the
+    three-day Codex deprecation. The questions grow from twelve to twenty-one with the
+    ones asked in incident reviews, audits, and renewals: insider exfiltration through
+    an assistant, hidden instructions in documents, retention and training terms, the
+    2am incident, cost caps, audit evidence, air-gapped operation, exit with the
+    derived artifacts, and the model updated underneath you. A twenty-seven answer FAQ
+    about the framework itself and a sourced reading list join the resources.
+- date: 2026-08-26
+  version: "1.1"
+  title: "Control gains a sixth vertical: remote access"
+  body: >
+    Twelve buyer questions collected from real rooms kept landing on the same missing
+    ground: remote work without data movement, consultants and contractors, cross-border
+    travel, and cross-border data governance. Eight of the twelve mapped to Control, so
+    Control now carries remote access as a first-class vertical alongside configuration,
+    ingress, identity, storage, and routing. The questions themselves are published at
+    /resources/questions/.
+- date: 2026-08-26
+  version: "1.0"
+  title: "The framework site launches at brocs.fyi"
+  body: >
+    Five letters, twenty-six vertical pages, the failure-mode library with seven sourced
+    public incidents, a thirty-two term glossary, the assessment and its scoreline, why
+    five, and adjacent practices. The framework text is published under CC BY 4.0 and
+    the data files are public at github.com/calliopeai/brocs.
+- date: 2026-08-22
+  version: "0.9"
+  title: "BROCS is coined"
+  body: >
+    The origin essay is published at leomata.com/blog/brocs. Build, Run, Observe,
+    Control, Secure, named as the five parts of the surface where AI apps and agents
+    meet the enterprise.
