@@ -1,0 +1,25 @@
+# The discipline map: which established disciplines feed which letters. This is the
+# "BROCS collapses the overlap" diagram as data. strength: full = the letter leans on
+# this discipline directly; partial = it contributes but is not the backbone.
+- name: "DevOps / DORA"
+  letters: { build: full, run: partial, observe: partial }
+- name: "Platform engineering"
+  letters: { build: full, run: full, observe: partial, control: partial }
+- name: "SRE"
+  letters: { run: full, observe: full, control: partial }
+- name: "PaaS / hybrid cloud"
+  letters: { run: full, control: partial }
+- name: "Observability"
+  letters: { observe: full }
+- name: "Control theory"
+  letters: { observe: partial, control: full }
+- name: "GitOps / config management"
+  letters: { control: full, build: partial }
+- name: "Zero trust / IAM"
+  letters: { control: full, secure: partial }
+- name: "SecOps"
+  letters: { secure: full, control: partial }
+- name: "GRC / audit"
+  letters: { secure: full }
+- name: "FinOps"
+  letters: { secure: full, observe: partial }

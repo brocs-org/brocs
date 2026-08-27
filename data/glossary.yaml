@@ -3,248 +3,213 @@
 #
 # letter: optional, ties the term to a BROCS capability.
 
-- term: "BROCS"
-  letter: ""
+- term: BROCS
+  letter: ''
   definition: >
-    BROCS is a vendor-neutral framework for assessing enterprise AI enablement across
-    Build, Run, Observe, Control, and Secure. It is pronounced like "brocks".
-
-- term: "Enterprise AI operations"
-  letter: ""
+    BROCS is a vendor-neutral framework for assessing enterprise AI enablement across Build,
+    Run, Observe, Control, and Secure. It is pronounced like "brocks".
+- term: Enterprise AI operations
+  letter: ''
   definition: >
-    The shared services, responsibilities, and controls used to deliver, run, observe,
-    change, and secure AI systems across an organization. The term covers purchased,
-    configured, and custom systems already in use.
-
-- term: "Operational maturity"
-  letter: ""
+    The shared services, responsibilities, and controls used to deliver, run, observe, change,
+    and secure AI systems across an organization. The term covers purchased, configured, and
+    custom systems already in use.
+- term: Operational maturity
+  letter: ''
   definition: >
-    The degree to which operating capabilities work consistently and can be supported by
-    current evidence. BROCS discusses operational maturity through evidence-backed
-    coverage across five scopes. Its scoreline is an internal diagnostic.
-
-- term: "Production AI operating model"
-  letter: ""
+    The degree to which operating capabilities work consistently and can be supported by current
+    evidence. BROCS discusses operational maturity through evidence-backed coverage across
+    five scopes. Its scoreline is an internal diagnostic.
+- term: Production AI operating model
+  letter: ''
   definition: >
     The ownership, interfaces, shared services, and evidence used to support AI workloads
     in production. BROCS organizes the model under Build, Run, Observe, Control, and Secure.
-
-- term: "AI readiness"
-  letter: ""
+- term: AI readiness
+  letter: ''
   definition: >
-    The ability to meet the requirements of an intended AI system before deployment.
-    BROCS tests readiness across the delivery path, runtime, telemetry, change mechanisms,
-    and enforced organizational requirements.
-
-- term: "GenAIOps"
+    The ability to meet the requirements of an intended AI system before deployment. BROCS
+    tests readiness across the delivery path, runtime, telemetry, change mechanisms, and enforced
+    organizational requirements.
+- term: GenAIOps
   letter: observe
   definition: >
-    Generative AI operations, sometimes called LLMOps. It extends MLOps practices to
-    prompts, orchestration, grounding data, retrieval indexes, evals, and generative AI
-    applications.
-
-- term: "Agent operations"
+    Generative AI operations, sometimes called LLMOps. It extends MLOps practices to prompts,
+    orchestration, grounding data, retrieval indexes, evals, and generative AI applications.
+- term: Agent operations
   letter: control
   definition: >
     The operating practices for agents that use tools or take actions. They cover runtime,
     identity, state, traces, authorization, action limits, recovery, and retained evidence.
-
-- term: "Operating surface"
-  letter: ""
+- term: Operating surface
+  letter: ''
   definition: >
     An operating surface is the combined operational capabilities, controls, and evidence
     used to support AI systems. BROCS groups this work under Build, Run, Observe, Control,
     and Secure.
-
-- term: "Scoreline"
-  letter: ""
+- term: BROCS Score
+  letter: ''
+  definition: >-
+    An organization's total across the assessment, 0 to 25, with a named maturity level from
+    Uncovered to Covered. The scoreline is its five-digit breakdown by letter; the BROCS Score
+    is the number a board remembers.
+- term: Scoreline
+  letter: ''
   definition: >
-    A five-number summary of an organization's BROCS coverage, with one score of 0 to 5
-    per letter, written in letter order. B4 R3 O2 C3 S1 is a scoreline. Each score also
-    carries a level name, from Uncovered at 0 to Covered at 5.
-
-- term: "Tool churn"
+    A five-number summary of an organization's BROCS coverage, with one score of 0 to 5 per
+    letter, written in letter order. B4 R3 O2 C3 S1 is a scoreline. Each score also carries
+    a level name, from Uncovered at 0 to Covered at 5.
+- term: Tool churn
   letter: build
   definition: >
-    Frequent adoption, replacement, and retirement of AI tools. BROCS treats tool change
-    as a design constraint for shared services and integration contracts.
-
-- term: "Enablement layer"
+    Frequent adoption, replacement, and retirement of AI tools. BROCS treats tool change as
+    a design constraint for shared services and integration contracts.
+- term: Enablement layer
   letter: build
   definition: >
-    Shared identity, model access, data access, runtime, telemetry, and policy services
-    used across AI applications and tools.
-
-- term: "Shadow AI"
+    Shared identity, model access, data access, runtime, telemetry, and policy services used
+    across AI applications and tools.
+- term: Shadow AI
   letter: secure
   definition: >
-    Use of AI tools that the organization has not sanctioned, usually through personal
-    accounts and personal payment methods. It often increases when approved options are
-    unavailable or slower than the work requires.
-
-- term: "BYOK"
+    Use of AI tools that the organization has not sanctioned, usually through personal accounts
+    and personal payment methods. It often increases when approved options are unavailable
+    or slower than the work requires.
+- term: BYOK
   letter: build
   definition: >
-    Bring your own key. The customer supplies their own model provider credentials so
-    inference is billed to and governed through the customer's provider account.
-
-- term: "BAA endpoint"
+    Bring your own key. The customer supplies their own model provider credentials so inference
+    is billed to and governed through the customer's provider account.
+- term: BAA endpoint
   letter: build
   definition: >
-    A model endpoint covered by a Business Associate Agreement, permitting protected
-    health information to be handled under the agreement's HIPAA terms.
-
-- term: "Sovereignty"
+    A model endpoint covered by a Business Associate Agreement, permitting protected health
+    information to be handled under the agreement's HIPAA terms.
+- term: Sovereignty
   letter: run
   definition: >
-    The property that inference and data processing happen somewhere the organization
-    controls legally and physically. Jurisdiction, regulation, contracts, and internal
-    policy determine the required placement.
-
-- term: "Golden path"
+    The property that inference and data processing happen somewhere the organization controls
+    legally and physically. Jurisdiction, regulation, contracts, and internal policy determine
+    the required placement.
+- term: Golden path
   letter: build
   definition: >
-    A documented and supported route from idea to production with approved templates,
-    controls, and automation. It is designed to be the easiest delivery path to use.
-
-- term: "Integration tax"
-  letter: ""
+    A documented and supported route from idea to production with approved templates, controls,
+    and automation. It is designed to be the easiest delivery path to use.
+- term: Integration tax
+  letter: ''
   definition: >
-    The cumulative cost of contracts, integrations, identity wiring, and audit processes
-    incurred when capabilities are split across products and suppliers.
-
-- term: "Control plane"
+    The cumulative cost of contracts, integrations, identity wiring, and audit processes incurred
+    when capabilities are split across products and suppliers.
+- term: Control plane
   letter: control
   definition: >
-    The part of a system that decides what should be running, with what configuration.
-    Distinct from the data plane, which carries the actual work.
-
-- term: "Data plane"
+    The part of a system that decides what should be running, with what configuration. Distinct
+    from the data plane, which carries the actual work.
+- term: Data plane
   letter: run
   definition: >
-    The part of a system that processes requests, inference, and data. Its availability
-    requirements may differ from those of the control plane.
-
-- term: "Provisioning"
+    The part of a system that processes requests, inference, and data. Its availability requirements
+    may differ from those of the control plane.
+- term: Provisioning
   letter: run
   definition: >
-    Creating the infrastructure a piece of work needs: compute, database, secrets,
-    ingress, and identity. Self-service provisioning provides these resources through an
-    approved automated path.
-
-- term: "Portability"
+    Creating the infrastructure a piece of work needs: compute, database, secrets, ingress,
+    and identity. Self-service provisioning provides these resources through an approved automated
+    path.
+- term: Portability
   letter: run
   definition: >
-    The ability to run the same workload in a different place without rewriting it.
-    BROCS evaluates whether a workload can run in each environment permitted for its data,
-    including local, private, and public infrastructure.
-
-- term: "Golden signals"
+    The ability to run the same workload in a different place without rewriting it. BROCS
+    evaluates whether a workload can run in each environment permitted for its data, including
+    local, private, and public infrastructure.
+- term: Golden signals
   letter: observe
   definition: >
-    Latency, traffic, errors, and saturation. The four SRE signals. For AI workloads the
-    BROCS measurement set also includes tokens, cost, tool calls, and application-specific
-    success or refusal rates.
-
-- term: "Agent trace"
+    Latency, traffic, errors, and saturation. The four SRE signals. For AI workloads the BROCS
+    measurement set also includes tokens, cost, tool calls, and application-specific success
+    or refusal rates.
+- term: Agent trace
   letter: observe
   definition: >
-    An ordered record of what an agent did in one run: prompts, tool calls, arguments,
-    results, and the data touched. It supports incident analysis, evaluation, and audit.
-
-- term: "Drift"
+    An ordered record of what an agent did in one run: prompts, tool calls, arguments, results,
+    and the data touched. It supports incident analysis, evaluation, and audit.
+- term: Drift
   letter: observe
   definition: >
-    Change in model behaviour over time without a corresponding change in your code.
-    Causes include provider updates, retrieval corpus changes, and prompt edits upstream
-    of you.
-
-- term: "Eval"
+    Change in model behaviour over time without a corresponding change in your code. Causes
+    include provider updates, retrieval corpus changes, and prompt edits upstream of you.
+- term: Eval
   letter: observe
   definition: >
-    A repeatable test of model or agent output quality against fixed inputs. It detects
-    regressions against expected outputs or grading criteria.
-
-- term: "Model routing"
+    A repeatable test of model or agent output quality against fixed inputs. It detects regressions
+    against expected outputs or grading criteria.
+- term: Model routing
   letter: control
   definition: >
-    Deciding at request time which model or provider serves a call, and being able to
-    change that decision centrally. This reduces the work required to change providers.
-
-- term: "Pinning"
+    Deciding at request time which model or provider serves a call, and being able to change
+    that decision centrally. This reduces the work required to change providers.
+- term: Pinning
   letter: control
   definition: >
-    Fixing a workload to a specific model version so a provider update cannot change
-    behavior without an explicit version change.
-
-- term: "Ingress"
+    Fixing a workload to a specific model version so a provider update cannot change behavior
+    without an explicit version change.
+- term: Ingress
   letter: control
   definition: >
-    The path through which requests reach an application and where authentication,
-    authorization, and request logging are applied.
-
-- term: "Prompt injection"
+    The path through which requests reach an application and where authentication, authorization,
+    and request logging are applied.
+- term: Prompt injection
   letter: secure
   definition: >
-    Getting a model to follow instructions from content rather than from its operator.
-    Direct injection comes from the user; indirect injection arrives inside data the
-    model reads, such as a document, a web page, or an email.
-
-- term: "Blast radius"
+    Getting a model to follow instructions from content rather than from its operator. Direct
+    injection comes from the user; indirect injection arrives inside data the model reads,
+    such as a document, a web page, or an email.
+- term: Blast radius
   letter: secure
   definition: >
-    Everything a component can reach if it is compromised or simply wrong. For an agent
-    it includes its tool permissions, standing data access, network access, and available
-    credentials.
-
-- term: "Human in the loop"
+    Everything a component can reach if it is compromised or simply wrong. For an agent it
+    includes its tool permissions, standing data access, network access, and available credentials.
+- term: Human in the loop
   letter: secure
   definition: >
-    A required human approval on a specific class of action before it executes. Useful
-    approvals are narrowly scoped, give the reviewer enough context, and cannot be
-    bypassed by content the agent reads.
-
-- term: "Showback"
+    A required human approval on a specific class of action before it executes. Useful approvals
+    are narrowly scoped, give the reviewer enough context, and cannot be bypassed by content
+    the agent reads.
+- term: Showback
   letter: secure
   definition: >
-    Reporting AI spend back to the team that incurred it without moving money.
-    Chargeback moves the money as well. Both require per-team, per-app attribution at
-    the point of inference.
-
-- term: "Audit evidence"
+    Reporting AI spend back to the team that incurred it without moving money. Chargeback
+    moves the money as well. Both require per-team, per-app attribution at the point of inference.
+- term: Audit evidence
   letter: secure
   definition: >
-    The artifacts a control owner or auditor needs to show a control operated: access
-    records, approvals, traces, and retention proof. BROCS expects operating systems to
-    produce this evidence continuously.
-
-- term: "DORA metrics"
+    The artifacts a control owner or auditor needs to show a control operated: access records,
+    approvals, traces, and retention proof. BROCS expects operating systems to produce this
+    evidence continuously.
+- term: DORA metrics
   letter: build
   definition: >
-    Change lead time, deployment frequency, failed deployment recovery time, change fail
-    rate, and deployment rework rate, as defined by DORA. BROCS applies change lead time
-    to versioned AI changes and uses value-stream mapping for idea-to-production flow.
-
-- term: "Platform engineering"
+    Change lead time, deployment frequency, failed deployment recovery time, change fail rate,
+    and deployment rework rate, as defined by DORA. BROCS applies change lead time to versioned
+    AI changes and uses value-stream mapping for idea-to-production flow.
+- term: Platform engineering
   letter: build
   definition: >
-    Developing an internal platform as a product for its users. Its self-service, shared
-    capability, and product-management practices inform Build and Run.
-
-- term: "GRC"
+    Developing an internal platform as a product for its users. Its self-service, shared capability,
+    and product-management practices inform Build and Run.
+- term: GRC
   letter: secure
   definition: >
     Governance, risk, and compliance. BROCS connects GRC policy and evidence requirements
     to the systems that enforce them.
-
-- term: "FinOps"
+- term: FinOps
   letter: secure
   definition: >
-    An operating practice for allocating technology spend, assigning accountability, and
-    measuring unit economics. BROCS applies it to model and inference costs.
-
-- term: "Retrieval boundary"
+    An operating practice for allocating technology spend, assigning accountability, and measuring
+    unit economics. BROCS applies it to model and inference costs.
+- term: Retrieval boundary
   letter: control
   definition: >
-    The versioned, reviewed set of sources a model is permitted to answer from. Making
-    the set explicit lets the organization approve and audit the source corpus.
+    The versioned, reviewed set of sources a model is permitted to answer from. Making the
+    set explicit lets the organization approve and audit the source corpus.
