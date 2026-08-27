@@ -24,9 +24,9 @@
     Paradox patched within a day, and Paradox stated five records containing personal data
     were accessed. The exposure window, not the access count, is the finding.
   skipped: >
-    Secure. The AI surface inherited none of the access controls the rest of the estate has.
-    An admin credential that would fail any password policy survived because nobody treated
-    the chatbot as production infrastructure, and no audit covered it.
+    Secure. The chatbot lacked the access controls used elsewhere in the estate. An admin
+    credential that would fail any password policy survived because nobody treated the chatbot
+    as production infrastructure, and no audit covered it.
   sources:
   - title: AI Incident Database, incident 1179
     url: https://incidentdatabase.ai/cite/1179/
@@ -544,26 +544,21 @@
         decisions. The rollback began three days later, and OpenAI published two postmortems
         explaining how it got through.
   detail: >-
-    The postmortems are unusually candid: offline evals and A/B tests looked good,
-        some expert testers felt the model was slightly off, and the launch went ahead
-        anyway because the metrics outvoted the vibes. The behaviour change came from an
-        aggregation of individually reasonable adjustments, including a new reward signal
-        based on user feedback, that together tipped the model. For every organization
-        downstream it was a silent dependency change: the same model name, different
-        behaviour, no code change on your side.
+    The postmortems say offline evals and A/B tests looked good. Some expert testers
+        reported that the model felt off, but the launch proceeded because aggregate metrics
+        were positive. The behavior change came from several adjustments, including a new
+        reward signal based on user feedback. Downstream users received different behavior
+        under the same model name without a code change.
   skipped: >-
-    Observe. This is the reference case for the failure that returns a 200: nothing
-        was down, latency was fine, and the answers were worse in a way only a behavioural
-        measurement catches. If the provider's own evals can miss it, your pinned eval
-        suite and canary are not paranoia, they are the only instrument you have pointed
-        at the question.
+    Observe. The service stayed available while answer quality declined. Provider evals
+        missed the change, so downstream teams need a pinned eval suite and canary.
   sources:
   - title: 'OpenAI: Sycophancy in GPT-4o, what happened and what we''re doing about it'
     url: https://openai.com/index/sycophancy-in-gpt-4o/
   - title: 'OpenAI: Expanding on what we missed with sycophancy'
     url: https://openai.com/index/expanding-on-sycophancy/
 - id: codex-shutdown
-  title: Three days notice on a load-bearing model
+  title: Three days notice before a model shutdown
   org: OpenAI Codex API
   year: 2023
   industry: AI provider
@@ -578,18 +573,50 @@
   detail: >-
     Codex underpinned shipped developer tools and a body of published research;
         papers cite specific model versions that became unreproducible on a Thursday.
-        OpenAI's stated migration path was GPT-3.5-turbo, a differently shaped model with
-        different behaviour, which is a rewrite plus a re-evaluation rather than a
-        version bump. The episode set the template for a now routine event: providers
-        retire models on their schedule, not yours.
+        OpenAI's stated migration path was GPT-3.5-turbo, a model with different behavior
+        and API expectations. Migration required a rewrite and re-evaluation. The deprecation
+        shows that provider lifecycle follows the provider's schedule.
   skipped: >-
-    Run, then Control. A workload built directly on a provider's named model has a
-        dependency with someone else's lifecycle. The mitigations are exactly the
-        portability and routing story: an abstraction between application and model, a
-        tested alternative kept warm, and deprecation treated as a planned change with an
-        eval comparison rather than an emergency.
+    Run, then Control. A workload built directly on a provider's named model follows
+        the provider's lifecycle. Mitigations include an interface between the application
+        and model, a tested alternative, and an eval comparison before migration.
   sources:
   - title: 'Simon Willison: OpenAI to discontinue support for the Codex API'
     url: https://simonwillison.net/2023/Mar/21/openai-to-discontinue-support-for-the-codex-api/
   - title: OpenAI API deprecations page (Codex, 2023-03-20)
     url: https://developers.openai.com/api/docs/deprecations
+- id: llmstxt-unowned
+  title: 227 install commands pointing at code nobody owns
+  org: 120 sites incl. Fortune 500s / research via Ars Technica
+  year: 2026
+  industry: Cross-industry
+  letters:
+  - build
+  - secure
+  - run
+  summary: >-
+    Researchers scanned 6,214 corporate domains and found 120 llms.txt and llms-full.txt files
+    whose setup instructions referenced 227 unregistered packages or domains. They registered
+    a handful and hosted phone-home packages; within an hour a Fortune 500 beaconed back,
+    followed by dozens more, with parent-process chains showing coding agents (Claude, Codex,
+    Hermes) running the installs.
+  detail: >-
+    No instructions were planted: the files were honest documentation whose referenced names
+    were never registered or had lapsed, so anyone could claim them. One vendor's file pointed
+    at an npm slot that had already been claimed and filled with live malware (since resolved).
+    Endpoint detection saw nothing wrong, correctly by its own lights: a sanctioned package
+    manager talking to a sanctioned registry under a sanctioned parent process. The researchers'
+    framing generalises: everything an agent reads is input, every input is a potential instruction,
+    and almost none of the published corpus carries the integrity guarantees applied to code.
+  skipped: >-
+    Build first: agent-followed documentation is part of the software supply chain, and install
+    targets need the provenance checks any dependency gets. Secure, because tool constraint
+    beats model judgment: an agent that cannot fetch-and-execute in one motion is immune to
+    the class. Run, because open egress from agent runtimes is what let the phone-homes out;
+    the EDR was never asking the right question.
+  sources:
+  - title: >-
+      Ars Technica (Dan Goodin): Claude, Codex, and Hermes installed unowned code inside corporate
+      networks
+    url: >-
+      https://arstechnica.com/security/2026/08/claude-codex-and-hermes-installed-unowned-code-inside-corporate-networks/
