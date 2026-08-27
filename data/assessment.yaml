@@ -1,38 +1,184 @@
-# The BROCS assessment. Four statements per letter. You score one point for each
-# statement that is true of your organization today, giving 0 to 4 per letter and a
-# scoreline like B3 R2 O1 C2 S0.
+# The BROCS assessment. Five statements per letter. You score one point for each
+# statement that is true of your organization today, giving 0 to 5 per letter and a
+# scoreline like B4 R3 O2 C3 S1.
 #
 # Rules for writing a statement: it must be answerable by one person in under ten
 # seconds, it must be about what is actually in place rather than what is planned, and
 # it must not favour any product. Aspirational statements make the assessment useless
 # as a diagnostic, which is the only thing it is for.
+#
+# s: the statement. fix: what to do about an unchecked one, imperative, two sentences
+# at most; it feeds the generated report. link: the page that covers the work.
 
 build:
-  - "A new hire can get to a working AI development environment on their first day without filing a ticket."
-  - "Model API keys are issued, scoped, and rotated by a system, not pasted into a shared document or a personal account."
-  - "Someone who is not an engineer can build and ship something useful with AI on a supported path."
-  - "Swapping one AI coding tool for another is a configuration change, not a project."
-
+- s: >-
+    A new hire can get to a working AI development environment on their first day, with at
+    most one ticket.
+  fix: >
+    Build one golden path: a template that produces a running environment with keys, data
+    access, and telemetry already wired. Measure day-one lead time on the next hire rather
+    than estimating it.
+  link: /build/idea-to-production/
+- s: >-
+    Model API keys are issued, scoped, and rotated by a system, not pasted into a shared document
+    or a personal account.
+  fix: >
+    Put a gateway between applications and providers: apps authenticate with their own identity,
+    the gateway holds the provider key. Rotation becomes one change in one place, and every
+    call becomes attributable.
+  link: /build/keys-and-models/
+- s: >-
+    Someone who is not an engineer can build and ship something useful with AI on a supported
+    path.
+  fix: >
+    Give non-engineers a supported builder path that inherits the same identity, data scoping,
+    and telemetry as the engineering one. The alternative is not that they stop building;
+    it is that they build somewhere you cannot see.
+  link: /build/access/
+- s: Swapping one AI coding tool for another is a configuration change, not a project.
+  fix: >
+    Move identity, model credentials, data access, execution, and telemetry out of the tools
+    and into a layer they plug into. A tool that owns any of those five is a migration waiting
+    to be priced.
+  link: /build/tooling/
+- s: >-
+    Builders can get realistic non-production data through a supported path, without being
+    handed production credentials.
+  fix: >-
+    Provide synthetic and masked datasets as the default, with scoped real data by time-bound
+    exception. Most requests never need to climb past the first level, and the ones that do
+    get an expiry.
+  link: /build/data-access/
 run:
-  - "AI apps and agents run somewhere the platform team can name, with the same deployment path as everything else."
-  - "Databases, object storage, and secrets for AI workloads are provisioned on request rather than hand-built."
-  - "No production credential is held by an agent that also accepts free-text instructions."
-  - "You could run the same workload in a different cloud, or on your own hardware, without rewriting it."
-
+- s: >-
+    AI apps and agents run somewhere the platform team can name, with the same deployment
+    path as everything else.
+  fix: >
+    Name the machine every agent runs on today; anything on an unowned box moves to a runtime
+    with known boundaries. Long-running agents need a home your platform actually has, not
+    a VM somebody set up.
+  link: /run/runtime/
+- s: >-
+    Databases, object storage, and secrets for AI workloads are provisioned on request rather
+    than hand-built.
+  fix: >
+    Make provisioning one motion: compute, store, secret, and identity from a template that
+    owns the defaults. Hand-built stores are the ones with no backup policy and no owner.
+  link: /run/provisioning/
+- s: No production credential is held by an agent that also accepts free-text instructions.
+  fix: >
+    Scope agent credentials to the task, expire them with the session, and broker the genuinely
+    dangerous operations so the agent can invoke them but never hold the key. An instruction-following
+    process with a standing production credential is the Replit incident on a timer.
+  link: /run/secrets/
+- s: >-
+    You could run the same workload in a different cloud, or on your own hardware, without
+    rewriting it.
+  fix: >
+    Containerise the deployment unit, abstract the model endpoint, and keep the data plane
+    on portable interfaces. Then run the drill once and write down the number it produces.
+  link: /run/portability/
+- s: >-
+    Every store your AI applications write to, including the vector index and the prompt log,
+    has a named owner and a retention period.
+  fix: >-
+    List the stores; the list is incomplete until it includes the vector index, conversation
+    history, and the prompt log. Each gets an owner, a classification, and a retention period
+    something actually enforces.
+  link: /run/data-and-state/
 observe:
-  - "You can say what an AI application cost last month, broken down by team or by app."
-  - "You can reconstruct what an agent did in a given run: prompts, tool calls, and data touched."
-  - "Alerts about an AI app reach the person who built it, not only a central operations queue."
-  - "You would find out that model output quality got worse from your own measurements rather than from a customer."
-
+- s: You can say what an AI application cost last month, broken down by team or by app.
+  fix: >
+    Attribute every inference call to an app, a team, and a user at the gateway. Without attribution,
+    every later question about cost, quality, or usage is unanswerable at any price.
+  link: /observe/metrics/
+- s: >-
+    You can reconstruct what an agent did in a given run: prompts, tool calls, and data touched.
+  fix: >
+    Trace tool calls first: full arguments, results, and the identity used, redacted before
+    storage. That single record answers the incident question and the audit question at once.
+  link: /observe/traces/
+- s: Alerts about an AI app reach the person who built it, not only a central operations queue.
+  fix: >
+    Require a named owner at provisioning time and route the app's alerts to them. A central
+    queue full of other teams' alerts trains everyone to ignore the real one.
+  link: /observe/alerts/
+- s: >-
+    You would find out that model output quality got worse from your own measurements rather
+    than from a customer.
+  fix: >
+    Build a small eval suite from your real production failures, pin model versions, and run
+    a canary on a schedule. The characteristic AI failure returns a 200 and only a behavioural
+    measurement catches it.
+  link: /observe/model-behavior/
+- s: Users can flag a bad AI response in one click, and a person reads the flags.
+  fix: >-
+    Add the one-click flag and route it somewhere a human reads. It is the fastest detector
+    you can build for the failure that returns a 200, and a cluster of flags is an incident
+    signal.
+  link: /observe/what-matters/
 control:
-  - "Model, prompt, and routing configuration is versioned and reviewed like code, and can be rolled back."
-  - "Internal AI apps sit behind one front door with SSO, rather than a tunnel or a share link per team."
-  - "You can move a workload from one model or provider to another centrally, without touching application code."
-  - "Backups of AI application data exist and a restore has actually been tested."
-
+- s: >-
+    Model, prompt, and routing configuration is versioned and reviewed like code, and can
+    be rolled back.
+  fix: >
+    Move prompts and routing into version control and deploy them like code; retire the production
+    text box. Rollback is the property everything else here exists to buy.
+  link: /control/configuration/
+- s: >-
+    Internal AI apps sit behind one front door with SSO, rather than a tunnel or a share link
+    per team.
+  fix: >
+    Stand up one identity-aware ingress and make getting behind it faster than starting a
+    tunnel. You also gain the kill switch: one place to stop a misbehaving app in minutes.
+  link: /control/ingress/
+- s: >-
+    You can move a workload from one model or provider to another centrally, without touching
+    application code.
+  fix: >
+    Route model calls through a layer that decides provider, version, and failover by configuration.
+    Application code that names a provider has made a procurement decision it cannot unmake.
+  link: /control/routing/
+- s: Backups of AI application data exist and a restore has actually been tested.
+  fix: >
+    Schedule a restore drill with a name attached, and include the vector index, whose rebuild
+    time is probably unknown and probably matters. An untested backup is a belief.
+  link: /control/storage-and-backups/
+- s: >-
+    When an AI application reads data on a person's behalf, it reads with that person's permissions,
+    not a service account's.
+  fix: >-
+    Carry the user's identity through the tool call to the data layer, so the model can only
+    ever see what the asking user could see. A broad service account behind an assistant is
+    an entitlement bypass with a chat interface.
+  link: /control/identity/
 secure:
-  - "Every agent's tool permissions are enumerated somewhere a human reviews."
-  - "You have a current picture of which unsanctioned AI tools are in use in the organization."
-  - "AI spend is attributed to a team or cost centre and reported back to them."
-  - "You could produce audit evidence for an AI system this week without a scramble."
+- s: Every agent's tool permissions are enumerated somewhere a human reviews.
+  fix: >
+    Write the blast-radius document per agent: tools and operations, identity, data reach,
+    egress, cost ceiling. The exercise is uncomfortable in exactly the way that makes it worth
+    doing.
+  link: /secure/agents/
+- s: You have a current picture of which unsanctioned AI tools are in use in the organization.
+  fix: >
+    Pull six months of expense reports and the OAuth grant list from your identity provider;
+    both outperform network telemetry. Then ship the sanctioned equivalent before closing
+    the unsanctioned path.
+  link: /secure/shadow-ai/
+- s: AI spend is attributed to a team or cost centre and reported back to them.
+  fix: >
+    Start with showback: tell each team what they spent. Visible cost changes behaviour faster
+    than policy, and most overspend is accidental.
+  link: /secure/cost/
+- s: You could produce audit evidence for an AI system this week without a scramble.
+  fix: >
+    Make evidence a byproduct of running: inventory generated from what is deployed, access
+    records from one ingress, change records from version control, processing records from
+    traces. An audit becomes a query instead of archaeology.
+  link: /secure/compliance/
+- s: Every rule in your AI policy names the mechanism that enforces it.
+  fix: >-
+    Walk the policy rule by rule and write the enforcement point next to each. Rules with
+    no mechanism are aspirations, which is fine only as long as everyone knows which ones
+    those are.
+  link: /secure/governance/

@@ -1,0 +1,15 @@
+# The BROCS maturity ladder. One ladder, two uses: a letter's level is the name for its
+# 0-5 score, and the overall level is the name for total/5. Six rungs, named for what
+# is actually true at that rung rather than for how it feels.
+- name: Uncovered
+  blurb: "Nothing is in place. Not weak: absent. The honest starting point for most letters in most organizations."
+- name: Improvised
+  blurb: "Individuals have solved it for themselves. It works until the person who built it changes teams."
+- name: Emerging
+  blurb: "The first shared mechanisms exist. Coverage depends on which team you ask."
+- name: Operational
+  blurb: "The mechanisms are the default path. Exceptions are visible because they are exceptions."
+- name: Managed
+  blurb: "Covered and measured. The remaining gaps are known, owned, and scheduled rather than discovered."
+- name: Covered
+  blurb: "All five statements hold. The work is keeping them true: the drills, the reviews, and the expiries."

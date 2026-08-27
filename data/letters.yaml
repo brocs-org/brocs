@@ -1,15 +1,15 @@
-# The five letters of the BROCS surface. Single source of truth for the nav,
-# the surface diagram, the assessment, the letter tags, and llms.txt generation.
+# The five BROCS capabilities. Single source of truth for the nav, the capability
+# diagram, the assessment, the letter tags, and llms.txt generation.
 # Colors live here so the diagram, tags, and scoreline never drift apart.
 - key: build
   letter: B
   name: Build
-  tagline: "Enable people to make things."
-  blurb: "Tools, access, keys, and data for everyone who builds, technical or not."
+  tagline: "Provide approved tools and delivery paths."
+  blurb: "Tools, access, models, and data for technical and non-technical builders."
   roots: "DevOps, DORA, platform engineering"
   handoff: run
   verticals:
-    - "Tooling: IDEs, agent CLIs, notebooks, chat surfaces"
+    - "Tooling: IDEs, agent CLIs, notebooks, chat applications"
     - "Access: who gets which tools, and how fast"
     - "Keys and models: distribution, scoping, rotation, BYOK"
     - "Data access: without handing out production credentials"
@@ -17,8 +17,8 @@
 - key: run
   letter: R
   name: Run
-  tagline: "Give the work somewhere to live."
-  blurb: "Apps, databases, secrets, provisioning, and the portability to move all of it."
+  tagline: "Operate AI workloads reliably."
+  blurb: "Runtime, state, secrets, provisioning, and placement across approved environments."
   roots: "SRE, PaaS, hybrid cloud"
   handoff: observe
   verticals:
@@ -30,26 +30,26 @@
 - key: observe
   letter: O
   name: Observe
-  tagline: "See what it is doing."
-  blurb: "Metrics, traces, and alerts, exposed to the people who own the thing."
+  tagline: "Measure system behavior and quality."
+  blurb: "Metrics, traces, evals, and alerts for service owners."
   roots: "Observability, control theory"
   handoff: control
   verticals:
     - "Metrics: golden signals plus tokens, cost, tool calls"
     - "Traces: reconstruct what an agent did, with what, on what data"
     - "Alerts: routed to the builder who owns the app"
-    - "What matters: signals that predict incidents, not dashboard decoration"
-    - "Model behavior: drift, silent provider updates, quality regressions"
+    - "Useful signals: decision-linked metrics and alert criteria"
+    - "Model behavior: drift, unannounced provider updates, quality regressions"
 - key: control
   letter: C
   name: Control
-  tagline: "Keep a hand on the wheel."
-  blurb: "Configuration, ingress, identity, storage, routing, and remote access you can change and roll back."
+  tagline: "Manage change and access."
+  blurb: "Versioned configuration, ingress, identity, storage, routing, and remote access."
   roots: "Control theory, ClickOps to GitOps"
   handoff: secure
   verticals:
     - "Configuration: declarative, versioned, reviewed, reversible"
-    - "Ingress: one front door for internal AI apps"
+    - "Ingress: a shared entry point for internal AI apps"
     - "Identity: SSO by default, external access without VPN sprawl"
     - "Storage and backups: retention, lifecycle, restore drills"
     - "Routing: model and provider routing, pinning, failover"
@@ -57,13 +57,13 @@
 - key: secure
   letter: S
   name: Secure
-  tagline: "Prove it is not going off the rails."
-  blurb: "Governance, agent oversight, cost accountability, and compliance evidence."
+  tagline: "Enforce policy and produce evidence."
+  blurb: "Governance, agent permissions, cost controls, incident records, and compliance evidence."
   roots: "SecOps, GRC, FinOps"
   handoff: build
   verticals:
-    - "Governance: policy encoded where it is enforced, not a PDF"
+    - "Governance: policy tied to enforcement points"
     - "Agents: tool permissions, audit trails, human in the loop"
-    - "Shadow AI: discovery of what people use when you give them nothing"
+    - "Shadow AI: discovery of unsanctioned tools and personal accounts"
     - "Cost: who spends what, on which model, showback and chargeback"
     - "Compliance: HIPAA, SOC 2, PCI, FedRAMP, EU AI Act as platform output"
