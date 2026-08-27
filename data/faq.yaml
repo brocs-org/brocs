@@ -135,7 +135,7 @@
         eyes. It is at brocs.fyi/resources/failure-modes/ and grows by contribution.
     - q: "Can I submit a failure mode?"
       a: >
-        Yes. Open an issue on github.com/calliopeai/brocs using the failure-mode
+        Yes. Open an issue on github.com/brocs-org/brocs using the failure-mode
         template, or send a pull request against data/failures.yaml. The bar is a
         public source and an arguable mapping to a letter. Anonymised war stories are
         welcome as discussion but do not enter the library without something a reader
@@ -178,7 +178,7 @@
     - q: "Can I disagree with the framework?"
       a: >
         Please. If a letter is wrong, the framework should change, and the changelog
-        exists to record exactly that. Open an issue at github.com/calliopeai/brocs
+        exists to record exactly that. Open an issue at github.com/brocs-org/brocs
         with which of the four letter tests your argument turns on. A framework that
         survives only among people who already agree with it is a preference, not a
         framework.
