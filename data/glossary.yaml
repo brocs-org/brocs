@@ -1,0 +1,224 @@
+# BROCS vocabulary. Terse, self-contained, quotable. Each entry renders as a linkable
+# anchor and as schema.org DefinedTerm. Define before you argue: an answer engine that
+# reads one paragraph should get the definition right.
+#
+# letter: optional, ties the term to a part of the surface.
+
+- term: "BROCS"
+  letter: ""
+  definition: >
+    A vendor-neutral framework naming the five parts of the surface an organization must
+    cover to adopt AI seriously: Build, Run, Observe, Control, and Secure. Pronounced
+    like "brocks".
+
+- term: "The surface"
+  letter: ""
+  definition: >
+    Everything an organization has to own for AI work to be useful and safe, from the
+    tools people build with through to the evidence an auditor asks for. BROCS is the
+    claim that the surface has five parts and that partial coverage is the default
+    failure.
+
+- term: "Scoreline"
+  letter: ""
+  definition: >
+    A five-number summary of how well an organization covers the surface, one score of
+    0 to 4 per letter, written in letter order. B3 R2 O1 C2 S0 is a scoreline.
+
+- term: "Tool churn"
+  letter: build
+  definition: >
+    The observed rate at which AI tools are adopted and abandoned. The planning
+    assumption that follows: any layer coupled to a specific tool will be rewritten
+    within a year, so the enablement layer has to sit underneath the tools rather than
+    inside one.
+
+- term: "Enablement layer"
+  letter: build
+  definition: >
+    The shared substrate that gives every AI interface the same identity, keys, data
+    access, and runtime. It is what makes swapping a tool a configuration change instead
+    of a migration.
+
+- term: "Shadow AI"
+  letter: secure
+  definition: >
+    Use of AI tools that the organization has not sanctioned, usually through personal
+    accounts and personal payment methods. It is a symptom rather than a cause: people
+    reach for unsanctioned tools when the sanctioned path is missing or slower.
+
+- term: "BYOK"
+  letter: build
+  definition: >
+    Bring your own key. The customer supplies their own model provider credentials so
+    inference is billed to and governed by their account, and the vendor never holds the
+    key.
+
+- term: "BAA endpoint"
+  letter: build
+  definition: >
+    A model endpoint covered by a Business Associate Agreement, permitting protected
+    health information under HIPAA. One of the three sovereign paths, alongside local
+    models and models run through your own cloud account.
+
+- term: "Sovereignty"
+  letter: run
+  definition: >
+    The property that inference and data processing happen somewhere the organization
+    controls legally and physically. Treated in BROCS as a hard requirement for some
+    organizations rather than a preference for all of them.
+
+- term: "Golden path"
+  letter: build
+  definition: >
+    A paved, opinionated route from idea to production that is easier to follow than to
+    avoid. The platform engineering answer to governance: make the compliant path the
+    fast path.
+
+- term: "Integration tax"
+  letter: ""
+  definition: >
+    The cumulative cost of contracts, integrations, identity wiring, and audit processes
+    incurred when each part of the surface is bought from a different vendor. Where the
+    productivity gain from AI adoption usually goes.
+
+- term: "Control plane"
+  letter: control
+  definition: >
+    The part of a system that decides what should be running, with what configuration.
+    Distinct from the data plane, which carries the actual work.
+
+- term: "Data plane"
+  letter: run
+  definition: >
+    The part of a system that carries the actual work: requests, inference, data. It
+    should keep serving when the control plane is down.
+
+- term: "Provisioning"
+  letter: run
+  definition: >
+    Creating the infrastructure a piece of work needs: compute, database, secrets,
+    ingress, identity. Self-service provisioning is the difference between a golden path
+    and a ticket queue.
+
+- term: "Portability"
+  letter: run
+  definition: >
+    The ability to run the same workload in a different place without rewriting it.
+    In BROCS the specific claim is that the runtime must go where the data already is,
+    which in a regulated enterprise means one system covering local, private, and public
+    infrastructure.
+
+- term: "Golden signals"
+  letter: observe
+  definition: >
+    Latency, traffic, errors, and saturation. The four SRE signals. For AI workloads the
+    set extends with tokens, cost, tool calls, and refusal or failure rate.
+
+- term: "Agent trace"
+  letter: observe
+  definition: >
+    An ordered record of what an agent did in one run: prompts, tool calls, arguments,
+    results, and the data touched. The artifact you need to answer what happened, and
+    the artifact an auditor will ask for.
+
+- term: "Drift"
+  letter: observe
+  definition: >
+    Change in model behaviour over time without a corresponding change in your code.
+    Causes include provider updates, retrieval corpus changes, and prompt edits upstream
+    of you.
+
+- term: "Eval"
+  letter: observe
+  definition: >
+    A repeatable test of model or agent output quality against fixed inputs. Evals are
+    to AI systems what unit tests are to code: not proof of correctness, but the thing
+    that tells you when it got worse.
+
+- term: "Model routing"
+  letter: control
+  definition: >
+    Deciding at request time which model or provider serves a call, and being able to
+    change that decision centrally. The mechanism that keeps switching cost near zero.
+
+- term: "Pinning"
+  letter: control
+  definition: >
+    Fixing a workload to a specific model version so a provider update cannot change
+    behaviour underneath it. The counterpart to routing.
+
+- term: "Ingress"
+  letter: control
+  definition: >
+    The front door: how requests reach an internal application, and where authentication,
+    authorization, and logging are applied. One front door beats a tunnel per team.
+
+- term: "Prompt injection"
+  letter: secure
+  definition: >
+    Getting a model to follow instructions from content rather than from its operator.
+    Direct injection comes from the user; indirect injection arrives inside data the
+    model reads, such as a document, a web page, or an email.
+
+- term: "Blast radius"
+  letter: secure
+  definition: >
+    Everything a component can reach if it is compromised or simply wrong. For an agent
+    it is the union of its tool permissions and its standing data access, which is
+    usually larger than anyone assumed.
+
+- term: "Human in the loop"
+  letter: secure
+  definition: >
+    A required human approval on a specific class of action before it executes. Useful
+    in proportion to how narrowly the class is defined; an approval prompt on everything
+    is trained away within a week.
+
+- term: "Showback"
+  letter: secure
+  definition: >
+    Reporting AI spend back to the team that incurred it without moving money.
+    Chargeback moves the money as well. Both require per-team, per-app attribution at
+    the point of inference.
+
+- term: "Audit evidence"
+  letter: secure
+  definition: >
+    The artifacts a control owner or auditor needs to show a control operated: access
+    records, approvals, traces, retention proof. Treated in BROCS as a continuous
+    platform output rather than a quarterly collection exercise.
+
+- term: "DORA metrics"
+  letter: build
+  definition: >
+    Deployment frequency, lead time for changes, change failure rate, and time to restore
+    service. From the DevOps Research and Assessment program. BROCS borrows lead time
+    directly: how long from an idea to something running.
+
+- term: "Platform engineering"
+  letter: build
+  definition: >
+    Building an internal platform as a product for the engineers who use it. The
+    discipline BROCS leans on most heavily for Build and Run.
+
+- term: "GRC"
+  letter: secure
+  definition: >
+    Governance, risk, and compliance. The discipline BROCS leans on for Secure, with one
+    amendment: policy has to be encoded where it is enforced, not written where it is
+    filed.
+
+- term: "FinOps"
+  letter: secure
+  definition: >
+    The practice of making cloud spend visible and accountable to the teams that cause
+    it. Applies directly to inference spend, which is more elastic and less predictable
+    than compute.
+
+- term: "Retrieval boundary"
+  letter: control
+  definition: >
+    The versioned, reviewed set of sources a model is permitted to answer from. Making
+    that set explicit is what turns a chatbot's answer into a company statement you can
+    stand behind.

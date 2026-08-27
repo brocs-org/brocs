@@ -1,0 +1,57 @@
+name: Submit a failure mode
+description: A public AI incident that maps to a letter of the surface that was skipped.
+title: "[Failure mode] "
+labels: ["failure-mode"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The bar is a **public source** and an **arguable mapping**. Anonymised stories
+        from your own organization are welcome as discussion, but they cannot go in the
+        library without something a reader can check.
+  - type: input
+    id: title
+    attributes:
+      label: What happened, in one line
+      placeholder: A default password and 64 million job applicants
+    validations:
+      required: true
+  - type: input
+    id: org
+    attributes:
+      label: Organization and year
+      placeholder: McDonald's / Paradox.ai, 2025
+    validations:
+      required: true
+  - type: checkboxes
+    id: letters
+    attributes:
+      label: Which letters does this map to?
+      description: Tick the primary one first in your description below.
+      options:
+        - label: "Build: tools, access, keys, data"
+        - label: "Run: runtime, state, secrets, provisioning, portability"
+        - label: "Observe: metrics, traces, alerts, model behaviour"
+        - label: "Control: configuration, ingress, identity, storage, routing"
+        - label: "Secure: governance, agents, shadow AI, cost, compliance"
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened
+      description: A few sentences. Facts, not commentary.
+    validations:
+      required: true
+  - type: textarea
+    id: skipped
+    attributes:
+      label: Which letter was skipped, and why do you say so?
+      description: The mapping is the interesting part. Argue it.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: One per line, with a URL. Primary sources preferred.
+    validations:
+      required: true

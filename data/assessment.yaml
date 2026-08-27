@@ -1,0 +1,38 @@
+# The BROCS assessment. Four statements per letter. You score one point for each
+# statement that is true of your organization today, giving 0 to 4 per letter and a
+# scoreline like B3 R2 O1 C2 S0.
+#
+# Rules for writing a statement: it must be answerable by one person in under ten
+# seconds, it must be about what is actually in place rather than what is planned, and
+# it must not favour any product. Aspirational statements make the assessment useless
+# as a diagnostic, which is the only thing it is for.
+
+build:
+  - "A new hire can get to a working AI development environment on their first day without filing a ticket."
+  - "Model API keys are issued, scoped, and rotated by a system, not pasted into a shared document or a personal account."
+  - "Someone who is not an engineer can build and ship something useful with AI on a supported path."
+  - "Swapping one AI coding tool for another is a configuration change, not a project."
+
+run:
+  - "AI apps and agents run somewhere the platform team can name, with the same deployment path as everything else."
+  - "Databases, object storage, and secrets for AI workloads are provisioned on request rather than hand-built."
+  - "No production credential is held by an agent that also accepts free-text instructions."
+  - "You could run the same workload in a different cloud, or on your own hardware, without rewriting it."
+
+observe:
+  - "You can say what an AI application cost last month, broken down by team or by app."
+  - "You can reconstruct what an agent did in a given run: prompts, tool calls, and data touched."
+  - "Alerts about an AI app reach the person who built it, not only a central operations queue."
+  - "You would find out that model output quality got worse from your own measurements rather than from a customer."
+
+control:
+  - "Model, prompt, and routing configuration is versioned and reviewed like code, and can be rolled back."
+  - "Internal AI apps sit behind one front door with SSO, rather than a tunnel or a share link per team."
+  - "You can move a workload from one model or provider to another centrally, without touching application code."
+  - "Backups of AI application data exist and a restore has actually been tested."
+
+secure:
+  - "Every agent's tool permissions are enumerated somewhere a human reviews."
+  - "You have a current picture of which unsanctioned AI tools are in use in the organization."
+  - "AI spend is attributed to a team or cost centre and reported back to them."
+  - "You could produce audit evidence for an AI system this week without a scramble."

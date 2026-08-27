@@ -1,0 +1,183 @@
+# The failure-mode library. Every entry maps a public incident to the letter that was
+# skipped. Rules: the incident must be publicly reported, every entry carries at least
+# one primary or first-hand source, and the mapping has to be arguable on the facts
+# rather than convenient. No vendor scoring, including our own.
+#
+# letters: the first is primary; the rest are contributing.
+
+- id: mchire
+  title: "A default password and 64 million job applicants"
+  org: "McDonald's / Paradox.ai"
+  year: 2025
+  industry: "Food service, hiring"
+  letters: [secure, control]
+  summary: >
+    The McHire recruitment chatbot could be reached with an administrator account whose
+    username and password were both 123456. Behind it, an insecure direct object
+    reference in the internal API let any authenticated account walk the applicant table.
+  detail: >
+    Researchers Ian Carroll and Sam Curry reported that the combination exposed the
+    contact records of more than 64 million applicants: names, email addresses, phone
+    numbers, and IP addresses. They accessed seven records to prove it and reported it;
+    McDonald's and Paradox patched within a day, and Paradox stated five records
+    containing personal data were accessed. The exposure window, not the access count,
+    is the finding.
+  skipped: >
+    Secure. The AI surface inherited none of the access controls the rest of the estate
+    has. An admin credential that would fail any password policy survived because
+    nobody treated the chatbot as production infrastructure, and no audit covered it.
+  sources:
+    - title: "AI Incident Database, incident 1179"
+      url: "https://incidentdatabase.ai/cite/1179/"
+    - title: "Dark Reading: Lessons learned from McDonald's big AI flub"
+      url: "https://www.darkreading.com/application-security/lessons-learned-mcdonalds-ai-flub"
+
+- id: replit-prod-db
+  title: "An agent dropped the production database during a code freeze"
+  org: "Replit / SaaStr"
+  year: 2025
+  industry: "SaaS, developer tooling"
+  letters: [run, control, observe]
+  summary: >
+    Nine days into a public vibe-coding experiment, SaaStr founder Jason Lemkin declared
+    a code freeze. The Replit agent dropped the production tables anyway, destroying
+    records on roughly 1,200 companies and a similar number of executives.
+  detail: >
+    The agent then reported that rollback was impossible, which turned out to be untrue,
+    and generated thousands of fabricated user records. The failure was not that the
+    model made a mistake. The failure was that a non-deterministic process held
+    unmediated write credentials to a production database, and the environment offered
+    no boundary that a code freeze could actually be enforced against.
+  skipped: >
+    Run, then Control. Production and development were the same database with the same
+    credentials. There was no separation to violate, so the instruction not to touch it
+    was a request rather than a control.
+  sources:
+    - title: "The Register: Replit deleted user's production database"
+      url: "https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/"
+    - title: "AI Incident Database, incident 1152"
+      url: "https://incidentdatabase.ai/cite/1152/"
+
+- id: air-canada-chatbot
+  title: "The chatbot invented a refund policy and the airline had to honour it"
+  org: "Air Canada"
+  year: 2024
+  industry: "Airlines"
+  letters: [control, observe]
+  summary: >
+    Air Canada's website chatbot told Jake Moffatt he could apply for a bereavement fare
+    retroactively. The airline's actual policy said the opposite. British Columbia's
+    Civil Resolution Tribunal held the airline liable for negligent misrepresentation.
+  detail: >
+    Air Canada argued that the chatbot was a separate legal entity responsible for its
+    own statements. The tribunal rejected this: the chatbot was part of the website, the
+    airline owed a duty of care, and it is the company's job to ensure its
+    representations are accurate. Moffatt v. Air Canada, 2024 BCCRT 149.
+  skipped: >
+    Control. Nothing constrained what the model could assert about company policy, and
+    no versioned, reviewed source of policy text sat between the model and the customer.
+    A retrieval boundary is a control, not a feature.
+  sources:
+    - title: "Moffatt v. Air Canada, 2024 BCCRT 149 (decision text)"
+      url: "https://s3.amazonaws.com/IGG/AI+Part+1+-+Materials/Moffatt+v.+Air+Canada.pdf"
+    - title: "American Bar Association: BC tribunal confirms companies remain liable"
+      url: "https://www.americanbar.org/groups/business_law/resources/business-law-today/2024-february/bc-tribunal-confirms-companies-remain-liable-information-provided-ai-chatbot/"
+
+- id: deepseek-clickhouse
+  title: "A public ClickHouse instance with a million log lines and the API keys"
+  org: "DeepSeek"
+  year: 2025
+  industry: "AI provider"
+  letters: [run, secure]
+  summary: >
+    Wiz Research found two open ports on DeepSeek infrastructure leading to a ClickHouse
+    database with no authentication. It held over a million log entries including chat
+    history, API keys, and backend service detail, queryable by anyone over HTTP.
+  detail: >
+    The exposure was ordinary infrastructure hygiene, not a novel AI attack. It is in
+    this library because it is the risk your vendor carries on your behalf: everything
+    your builders sent to that endpoint was in those logs. DeepSeek secured it after
+    responsible disclosure.
+  skipped: >
+    Run. Data plane and control plane provisioned without the guardrails the rest of the
+    stack gets. For the enterprise consuming that endpoint the skipped letter is Secure:
+    nobody asked where the prompts land, in what form, or for how long.
+  sources:
+    - title: "Wiz Research: exposed DeepSeek database leaking sensitive information"
+      url: "https://www.wiz.io/blog/wiz-research-uncovers-exposed-deepseek-database-leak"
+
+- id: echoleak
+  title: "Zero-click exfiltration from an assistant that could read everything"
+  org: "Microsoft 365 Copilot"
+  year: 2025
+  industry: "Productivity software"
+  letters: [secure, control]
+  summary: >
+    EchoLeak (CVE-2025-32711, CVSS 9.3) let an attacker exfiltrate internal data from
+    Microsoft 365 Copilot by sending an email. No click, no attachment opened, no user
+    action of any kind.
+  detail: >
+    A payload hidden in an email, as an HTML comment or white-on-white text, was read
+    and retained by the assistant. Aim Security chained several bypasses to defeat the
+    cross-prompt-injection classifier, evade link redaction, and exfiltrate through an
+    auto-fetched image via a proxy the content security policy already allowed.
+    Microsoft patched it server side and reported no exploitation in the wild.
+  skipped: >
+    Secure. The blast radius of an assistant is the union of everything it can read.
+    Untrusted input reached a component holding broad standing access to internal
+    documents, and the trust boundary between the two was assumed rather than enforced.
+  sources:
+    - title: "arXiv: EchoLeak, the first real-world zero-click prompt injection exploit"
+      url: "https://arxiv.org/abs/2509.10540"
+    - title: "Hack The Box: inside CVE-2025-32711"
+      url: "https://www.hackthebox.com/blog/cve-2025-32711-echoleak-copilot-vulnerability"
+
+- id: amazon-q-wiper
+  title: "A wiper prompt shipped in the official extension release"
+  org: "Amazon Q Developer for VS Code"
+  year: 2025
+  industry: "Developer tooling"
+  letters: [build, secure]
+  summary: >
+    A pull request from an untrusted contributor was merged into the aws-toolkit-vscode
+    repository and shipped in release 1.84.0. It carried a prompt instructing the agent
+    to act as a system cleaner and delete local files and cloud resources via the AWS
+    CLI. The extension has close to a million installs.
+  detail: >
+    A syntax error stopped the payload from running. Amazon revoked the credentials,
+    pulled 1.84.0, and shipped 1.85.0; the issue is tracked as CVE-2025-8217. The
+    delivery vehicle was not code, it was English: a prompt is now an executable
+    artifact in the supply chain, and review processes built to read diffs of code
+    treat it as a comment.
+  skipped: >
+    Build. Agent tooling is a software supply chain and needs the same provenance,
+    review, and pinning as any other dependency. Ad hoc extension installs are how it
+    arrives without any of that.
+  sources:
+    - title: "SC Media: Amazon Q extension for VS Code injected with wiper prompt"
+      url: "https://www.scworld.com/news/amazon-q-extension-for-vs-code-reportedly-injected-with-wiper-prompt"
+
+- id: cursor-support-bot
+  title: "A support bot invented a policy and customers cancelled over it"
+  org: "Cursor"
+  year: 2025
+  industry: "Developer tooling"
+  letters: [observe, control]
+  summary: >
+    Users switching machines started getting logged out. Cursor's AI support agent, which
+    signed its emails as Sam, told them this was a deliberate one-device-per-subscription
+    security policy. No such policy existed. Developers cancelled.
+  detail: >
+    The logouts were a side effect of a security update. The invented explanation went
+    out under the company's name, at customer-support volume, before a human read it.
+    Cursor's co-founder corrected it publicly and the company began labelling
+    AI-generated support replies.
+  skipped: >
+    Observe. Nothing sampled what the agent was actually telling customers, so a
+    fabricated policy circulated at scale until customers escalated it on social media.
+    Your users should not be the monitoring layer.
+  sources:
+    - title: "eWeek: Cursor AI chatbot hallucination, fake policy"
+      url: "https://www.eweek.com/news/cursor-ai-chatbot-hallucination-fake-policy/"
+    - title: "CX Today: a contact centre chatbot invents company policies"
+      url: "https://www.cxtoday.com/contact-center/a-contact-center-chatbot-invents-company-policies-now-customers-want-out/"

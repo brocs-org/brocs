@@ -1,0 +1,24 @@
+name: Argue with the framework
+description: A letter is wrong, missing, or should not be a letter.
+title: "[Framework] "
+labels: ["framework"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Each letter has to pass four tests: a distinct owner, a distinct observable
+        failure when skipped, a mature adjacent discipline to borrow from, and the
+        ability to be at zero on it while strong elsewhere. See
+        [why five](https://brocs.fyi/resources/why-five/).
+  - type: textarea
+    id: claim
+    attributes:
+      label: What is wrong
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Which of the four tests does your position turn on?
+    validations:
+      required: true
