@@ -48,9 +48,11 @@
     public incidents, a thirty-two term glossary, the assessment and its scoreline, why
     five, and adjacent practices. The framework text is published under CC BY 4.0 and
     the data files are public at github.com/brocs-org/brocs.
-- date: 2026-08-22
+- date: 2026-05-23
   version: "0.9"
-  title: "BROCS is coined"
+  title: "BROCS is coined and published"
   body: >
-    The origin essay is published at leomata.com/blog/brocs. Build, Run, Observe,
-    Control, Secure, named as the capabilities required to enable AI in an enterprise.
+    Build, Run, Observe, Control, Secure, named as the capabilities required to enable
+    AI in an enterprise. Coined a few weeks earlier during an AI enablement engagement
+    for a healthtech startup, and published on May 23, 2026 in the origin essay at
+    leomata.com/blog/brocs.
