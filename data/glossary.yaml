@@ -178,6 +178,14 @@
   definition: >
     Everything a component can reach if it is compromised or simply wrong. For an agent it
     includes its tool permissions, standing data access, network access, and available credentials.
+- term: Data exfiltration
+  letter: secure
+  definition: >-
+    Data leaving its boundary through an AI channel: pasted into a prompt, pulled by an assistant
+    with broad read access, sent outbound by an agent with open egress, or carried in a trace
+    or log. The GRC question underneath is one of visibility: do you know, today, what data
+    your AI systems are sharing and accessing, internally and externally? If the answer needs
+    an investigation, the answer is no.
 - term: Human in the loop
   letter: secure
   definition: >
