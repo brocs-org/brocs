@@ -47,7 +47,9 @@ them; nothing is restated by hand.
 The library grows by contribution. The bar is a **public source** and an **arguable
 mapping** to a letter. Open an issue with the
 [failure-mode template](https://github.com/calliopeai/brocs/issues/new?template=failure-mode.yml),
-or send a pull request against `data/failures.yaml`.
+send a pull request against `data/failures.yaml`, or write to
+[failures@brocs.fyi](mailto:failures@brocs.fyi) if a public issue is not where you want
+to tell the story.
 
 Anonymised war stories from your own organization are welcome as discussion, but they
 will not go in the library without something a reader can check.
