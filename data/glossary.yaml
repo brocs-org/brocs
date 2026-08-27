@@ -80,6 +80,14 @@
   definition: >
     Bring your own key. The customer supplies their own model provider credentials so inference
     is billed to and governed through the customer's provider account.
+- term: BYOC
+  letter: run
+  definition: >-
+    Bring your own cloud. The platform's runtime deploys into the customer's own cloud account,
+    so the data plane, the data residency, and most of the bill live under the customer's
+    contract while the vendor supplies the software. The counterpart of BYOK one layer down:
+    BYOK keeps the model credential yours, BYOC keeps the entire runtime yours. The strong
+    form keeps serving when the vendor's control plane is unreachable.
 - term: BAA endpoint
   letter: build
   definition: >
